@@ -38,6 +38,20 @@ You can install this theme by pasting the following code into the custom CSS box
 
 </details>
 
+## 🎨 Customization
+
+You can override the following variables in your custom CSS (below the `@import`) to customize the theme:
+
+```css
+:root {
+    /* Use your instance's splashscreen as the login page background: */
+    --loginPageBgUrl: url('/Branding/Splashscreen?format=webp&foregroundLayer=1&quality=33&width=3840&height=2160&blur=2');
+
+    /* Change the login page heading text: */
+    --loginPageText: 'Sign in to continue';
+}
+```
+
 ## 👀 Previews
 
 <details>
@@ -70,6 +84,7 @@ NeutralFin is a modified version of the [ElegantFin](https://github.com/lscambo1
 - Applied a neutral black and grey color scheme
 - Fix media bar plugin container position
 - Fix media bar buttons consistency
+- Themed login page card (left blue by upstream)
 - Minor CSS refinements
 
 This project remains under the **GNU GPL-2.0 license**.  
