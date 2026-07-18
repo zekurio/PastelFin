@@ -3683,15 +3683,18 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child {
     width: 45% !important;
 }
 
+/* The heading is anchored above the card so longer (e.g. translated)
+   texts can wrap upwards without overlapping the login form */
 .manualLoginForm::before,
 .visualLoginForm::before {
     content: var(--loginPageText);
-    position: relative;
-    display: block;
-    top: -3.5em;
-    margin-bottom: -1em;
+    position: absolute;
+    bottom: calc(100% + 2em);
+    left: 0;
+    right: 0;
     font-size: 1.875em;
     font-weight: 800;
+    line-height: 1.2;
     color: white;
     text-align: center;
 }
