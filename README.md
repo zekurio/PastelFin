@@ -1,6 +1,6 @@
 # NeutralFin Theme
 
-NeutralFin is a custom Jellyfin theme based on [lscambo13's ElegantFin](https://github.com/lscambo13/ElegantFin), featuring a sleek black and grey color scheme for a more neutral and modern look.
+NeutralFin is a custom Jellyfin theme based on [lscambo13's ElegantFin](https://github.com/lscambo13/ElegantFin), featuring a sleek black and grey base with a lavender accent, set in Google Sans.
 
 The preview images also use the [Jellyfin Lucide](https://github.com/KartoffelChipss/Jellyfin-Lucide) theme for more modern icons.
 
@@ -49,8 +49,17 @@ You can override the following variables in your custom CSS (below the `@import`
 
     /* Change the login page heading text: */
     --loginPageText: 'Sign in to continue';
+
+    /* Retint the accent. --accentColor carries text, icons, progress bars and
+       focus rings; --accentColorStrong fills the surfaces that sit under light
+       text (buttons, selected rows), so it should be the darker of the two: */
+    --accentColor: #b39ddb;
+    --accentColorStrong: #9273c9;
 }
 ```
+
+To go back to the fully neutral look, point both at a grey — for example
+`--accentColor: rgb(130, 130, 130)` and `--accentColorStrong: rgb(100, 100, 100)`.
 
 ## 👀 Previews
 
@@ -82,6 +91,8 @@ NeutralFin is a modified version of the [ElegantFin](https://github.com/lscambo1
 ### Modifications by KartoffelChipss:
 
 - Applied a neutral black and grey color scheme
+- Lavender accent on top of the grey base
+- Google Sans as the UI font and Google Sans Code for monospace
 - Fix media bar plugin container position
 - Fix media bar buttons consistency
 - Themed login page card (left blue by upstream)

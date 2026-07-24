@@ -7,6 +7,8 @@
  *
  * Changes:
  * - Grey color scheme applied
+ * - Lavender accent on top of the grey base
+ * - Google Sans / Google Sans Code as the type stack
  * - Fix media bar plugin container position
  * - Fix media bar buttons consistency
  * - Fixed media bar age rating tag color
@@ -14,8 +16,8 @@
  * - Minor visual tweaks
  */
 
-/* Inter Font Family */
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+/* Google Sans (UI) and Google Sans Code (monospace) */
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap');
 
 :root {
     --elegantFinFooterText: 'NeutralFin 1.4.0 based on ElegantFin 26.06.06';
@@ -37,13 +39,19 @@
     --selectorBackgroundColor: rgb(60, 60, 60);
     --selectorBackgroundColorAlpha: rgba(60, 60, 60, 0.5);
 
-    --activeColorAlpha: rgba(100, 100, 100, 0.9);
-    --activeColor: rgb(100, 100, 100);
-    --osdSeekBarPlayedColor: var(--textColor);
+    /* Accent — lavender. --accentColor carries text, icons, progress and
+       focus rings; --accentColorStrong fills the surfaces that sit under
+       light text, where the lighter tone would not hold enough contrast. */
+    --accentColor: #b39ddb;
+    --accentColorStrong: #9273c9;
+
+    --activeColorAlpha: rgba(146, 115, 201, 0.9);
+    --activeColor: var(--accentColorStrong);
+    --osdSeekBarPlayedColor: var(--accentColor);
     --osdSeekBarBufferedColorAlpha: rgba(128, 128, 128, 0.5);
     --osdSeekBarThumbColor: white;
     --tableBodyColor: rgb(31, 31, 31);
-    --uiAccentColor: rgb(130, 130, 130);
+    --uiAccentColor: var(--accentColor);
     --btnMiniPlayColor: rgb(41, 154, 93);
     --btnMiniPlayBorderColor: rgb(50, 167, 105);
     --btnPlayBorderColor: color-mix(in srgb, var(--btnMiniPlayColor), rgb(255, 255, 255) 5%);
@@ -51,10 +59,10 @@
     /* Base component colors */
     --btnDeleteColor: rgb(169, 29, 29);
     --btnDeleteBorderColor: rgb(217, 84, 84);
-    --btnSubmitColor: rgb(90, 90, 90);
-    --btnSubmitBorderColor: rgb(130, 130, 130);
-    --checkboxCheckedBgColor: rgb(100, 100, 100);
-    --highlightOutlineColor: rgb(110, 110, 110);
+    --btnSubmitColor: var(--accentColorStrong);
+    --btnSubmitBorderColor: var(--accentColor);
+    --checkboxCheckedBgColor: var(--accentColorStrong);
+    --highlightOutlineColor: var(--accentColorStrong);
 
     --defaultBorder: var(--borderWidth) solid var(--borderColor);
     --defaultLighterBorder: var(--borderWidth) solid var(--lighterBorderColor);
@@ -241,11 +249,20 @@
 }
 
 html {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Google Sans', system-ui, sans-serif;
     font-optical-sizing: auto;
     font-weight: 425;
     font-style: normal;
     -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Form controls do not inherit the document font by default, so Jellyfin's
+   inputs, selects and buttons would otherwise fall back to the UA font */
+input,
+select,
+textarea,
+button {
+    font-family: inherit;
 }
 
 body {
@@ -329,7 +346,7 @@ select {
 }
 
 .dashboardFooter {
-    font-family: 'Noto Sans', serif;
+    font-family: 'Google Sans', system-ui, sans-serif;
     transition: transform 50ms;
 }
 
@@ -1235,7 +1252,7 @@ select {
 .mediaInfoOfficialRating {
     background: transparent !important;
     font-size: 0.75em;
-    font-family: 'Noto Sans', sans-serif;
+    font-family: 'Google Sans', system-ui, sans-serif;
     line-height: 1.5em;
     transform: translateY(-0.15em);
     font-weight: 600;
@@ -1781,7 +1798,7 @@ html,
 
 .itemProgressBarForeground {
     border-radius: 0 var(--largeRadius) var(--largeRadius) 0;
-    background-color: var(--dimTextColor);
+    background-color: var(--uiAccentColor);
 }
 
 .backgroundProgress > div,
@@ -3055,7 +3072,7 @@ div[data-role='controlgroup'] a.ui-btn-active {
 }
 
 .alphaPickerButton {
-    font-family: monospace;
+    font-family: 'Google Sans Code', ui-monospace, monospace;
     margin: 0.15em;
     color: rgba(255, 255, 255, 0.25);
 }
@@ -3350,7 +3367,7 @@ div[data-role='controlgroup'] a.ui-btn-active {
 }
 
 .emby-textarea {
-    font-family: consolas, monaco, monospace;
+    font-family: 'Google Sans Code', ui-monospace, consolas, monaco, monospace;
 }
 
 .customCssContainer textarea {
@@ -3693,7 +3710,7 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child {
     left: 0;
     right: 0;
     font-size: 1.875em;
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.2;
     color: white;
     text-align: center;
