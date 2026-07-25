@@ -1,14 +1,18 @@
 /*
- * NeutralFin v1.4.0
- * Modified version of ElegantFin Theme v26.06.06
- * Original author: lscambo13
- * Modified by: KartoffelChipss
+ * PastelFin v1.0.0
+ * Modified version of NeutralFin by KartoffelChipss,
+ * itself a modified version of ElegantFin Theme v26.06.06 by lscambo13
  * License: GNU GPL-2.0
  *
- * Changes:
- * - Grey color scheme applied
- * - Lavender accent on top of the grey base
+ * Changes in PastelFin:
+ * - Pastel lavender accent on top of the dark base
+ * - Chrome greys tinted toward the accent hue (app bar, drawer, borders,
+ *   selectors, page background)
+ * - Play buttons carry the accent instead of upstream's green
  * - Google Sans / Google Sans Code as the type stack
+ *
+ * Inherited from NeutralFin:
+ * - Grey color scheme applied
  * - Fix media bar plugin container position
  * - Fix media bar buttons consistency
  * - Fixed media bar age rating tag color
@@ -20,24 +24,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap');
 
 :root {
-    --elegantFinFooterText: 'NeutralFin 1.4.0 based on ElegantFin 26.06.06';
+    --elegantFinFooterText: 'PastelFin 1.0.0 based on ElegantFin 26.06.06';
 
-    /* Base theme colors */
+    /* Base theme colors.
+       The greys are shifted toward the accent hue rather than being flat
+       neutral, so the lavender reads across the whole chrome instead of only
+       on the handful of interactive elements. Swap these back to flat greys
+       (#131313 / #1e1e1e / rgba(40, 40, 40, x) / rgb(71, 71, 71) /
+       rgb(60, 60, 60)) for the untinted NeutralFin base. */
     color-scheme: dark;
-    --darkerGradientPoint: #131313;
-    --darkerGradientPointAlpha: rgba(17, 17, 17, 0.85);
-    --lighterGradientPoint: #1e1e1e;
-    --lighterGradientPointAlpha: rgba(30, 30, 30, 0.85);
-    --gradientPointAlpha: rgba(30, 30, 30, 0.3);
-    --headerColor: rgba(40, 40, 40, 0.5);
-    --drawerColor: rgba(40, 40, 40, 0.9);
+    --darkerGradientPoint: #141219;
+    --darkerGradientPointAlpha: rgba(18, 16, 23, 0.85);
+    --lighterGradientPoint: #201d27;
+    --lighterGradientPointAlpha: rgba(32, 29, 39, 0.85);
+    --gradientPointAlpha: rgba(32, 29, 39, 0.3);
+    /* The app bar and nav drawer, mirroring the tinted topbar in calthing /
+       costthing — always on screen, so this is where the tint does most work */
+    --headerColor: rgba(48, 42, 61, 0.55);
+    --drawerColor: rgba(48, 42, 61, 0.92);
 
-    --borderColor: rgb(71, 71, 71);
-    --darkerBorderColor: rgb(51, 51, 51);
+    --borderColor: #4a4356;
+    --darkerBorderColor: #35303e;
     --lighterBorderColor: rgba(255, 255, 255, 0.2);
 
-    --selectorBackgroundColor: rgb(60, 60, 60);
-    --selectorBackgroundColorAlpha: rgba(60, 60, 60, 0.5);
+    --selectorBackgroundColor: #3b3547;
+    --selectorBackgroundColorAlpha: rgba(59, 53, 71, 0.5);
 
     /* Accent — lavender. --accentColor carries text, icons, progress and
        focus rings; --accentColorStrong fills the surfaces that sit under
@@ -50,10 +61,13 @@
     --osdSeekBarPlayedColor: var(--accentColor);
     --osdSeekBarBufferedColorAlpha: rgba(128, 128, 128, 0.5);
     --osdSeekBarThumbColor: white;
-    --tableBodyColor: rgb(31, 31, 31);
+    --tableBodyColor: #211e28;
     --uiAccentColor: var(--accentColor);
-    --btnMiniPlayColor: rgb(41, 154, 93);
-    --btnMiniPlayBorderColor: rgb(50, 167, 105);
+    /* Play buttons — the most visible surface in the whole UI. Upstream ships
+       these green; set both back to rgb(41, 154, 93) / rgb(50, 167, 105) to
+       restore that. */
+    --btnMiniPlayColor: var(--accentColorStrong);
+    --btnMiniPlayBorderColor: var(--accentColor);
     --btnPlayBorderColor: color-mix(in srgb, var(--btnMiniPlayColor), rgb(255, 255, 255) 5%);
 
     /* Base component colors */
@@ -90,11 +104,11 @@
     );
     --headerColorGradient: linear-gradient(
         180deg,
-        rgba(40, 40, 40, 0.95) 30%,
+        rgba(48, 42, 61, 0.95) 30%,
         55%,
         transparent 90%
     );
-    --headerColorGradientAlt: linear-gradient(180deg, rgba(40, 40, 40, 0.95), 70%, transparent);
+    --headerColorGradientAlt: linear-gradient(180deg, rgba(48, 42, 61, 0.95), 70%, transparent);
     --headerBlurMask: linear-gradient(180deg, white 50%, 85%, transparent);
 
     --cardFooterGradient: linear-gradient(0deg, rgb(0 0 0 / 90%), 40%, transparent);
@@ -376,7 +390,7 @@ select {
 
 .card:focus .cardBox.visualCardBox,
 .card:focus .cardBox:not(.visualCardBox) .cardScalable {
-    border-color: white !important;
+    border-color: var(--accentColor) !important;
 }
 
 .mdl-radio__focus-circle,
@@ -507,7 +521,7 @@ select {
 
 .card-hoverable:hover .cardScalable,
 .card-hoverable:hover .visualCardBox {
-    border-color: white !important;
+    border-color: var(--accentColor) !important;
 }
 
 .card-hoverable:hover .visualCardBox .cardScalable {
@@ -1681,11 +1695,11 @@ html,
 
 .backgroundContainer.withBackdrop {
     opacity: 0.9;
-    background: linear-gradient(0deg, var(--darkerGradientPoint), 45%, rgba(19, 19, 19, 0.25));
+    background: linear-gradient(0deg, var(--darkerGradientPoint), 45%, rgba(20, 18, 25, 0.25));
 }
 
 .layout-tv .backgroundContainer.withBackdrop {
-    background: linear-gradient(0deg, var(--darkerGradientPoint), 45%, rgba(19, 19, 19, 0.95));
+    background: linear-gradient(0deg, var(--darkerGradientPoint), 45%, rgba(20, 18, 25, 0.95));
 }
 
 .layout-mobile .withSectionTabs .backgroundContainer.withBackdrop {
@@ -1939,7 +1953,7 @@ progress + span {
 }
 
 .button-link {
-    color: rgb(200, 200, 200);
+    color: var(--accentColor);
 }
 
 .button-link:hover {
@@ -3675,7 +3689,7 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child {
 
 #loginPage .padded-left.padded-right.padded-bottom-page {
     width: 28em;
-    background: rgba(30, 30, 30, 0.7);
+    background: rgba(32, 29, 39, 0.7);
     padding: 2em 2em 1em 2em !important;
     border-radius: var(--largerRadius);
     backdrop-filter: var(--blurDefault);

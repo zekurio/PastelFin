@@ -1,19 +1,19 @@
-# NeutralFin Theme
+# PastelFin Theme
 
-NeutralFin is a custom Jellyfin theme based on [lscambo13's ElegantFin](https://github.com/lscambo13/ElegantFin), featuring a sleek black and grey base with a lavender accent, set in Google Sans.
+PastelFin is a custom Jellyfin theme built on [KartoffelChipss' NeutralFin](https://github.com/KartoffelChipss/NeutralFin), which in turn builds on [lscambo13's ElegantFin](https://github.com/lscambo13/ElegantFin). It keeps the dark, low-contrast base and adds a pastel lavender accent, set in Google Sans.
 
 The preview images also use the [Jellyfin Lucide](https://github.com/KartoffelChipss/Jellyfin-Lucide) theme for more modern icons.
 
 For this theme to look best, we also recommend enabling backdrops in your Jellyfin settings.
 
-![Movie Pahe Preview](./assets/neutralfin-movie.webp)
+![Movie Pahe Preview](./assets/pastelfin-movie.webp)
 
 ## 📦 Install
 
 You can install this theme by pasting the following code into the custom CSS box:
 
 ```css
-@import url('https://cdn.jsdelivr.net/gh/KartoffelChipss/NeutralFin@latest/theme/neutralfin-minified.css');
+@import url('https://cdn.jsdelivr.net/gh/zekurio/PastelFin@main/theme/pastelfin-minified.css');
 ```
 
 <details>
@@ -58,41 +58,82 @@ You can override the following variables in your custom CSS (below the `@import`
 }
 ```
 
-To go back to the fully neutral look, point both at a grey — for example
+To go back to NeutralFin's fully neutral look, point both at a grey — for example
 `--accentColor: rgb(130, 130, 130)` and `--accentColorStrong: rgb(100, 100, 100)`.
+
+Two further dials, if the accent is stronger than you want:
+
+```css
+:root {
+    /* Restore upstream's green play buttons: */
+    --btnMiniPlayColor: rgb(41, 154, 93);
+    --btnMiniPlayBorderColor: rgb(50, 167, 105);
+
+    /* Untint the chrome back to flat grey: */
+    --darkerGradientPoint: #131313;
+    --lighterGradientPoint: #1e1e1e;
+    --headerColor: rgba(40, 40, 40, 0.5);
+    --drawerColor: rgba(40, 40, 40, 0.9);
+    --borderColor: rgb(71, 71, 71);
+    --selectorBackgroundColor: rgb(60, 60, 60);
+}
+```
+
+## 🔄 Updating
+
+jsDelivr caches each file at its edge for 12 hours, and browsers hold it for 7 days.
+A `?v=` query string does **not** bust the jsDelivr cache — it only affects the browser,
+since jsDelivr ignores the query string when computing its cache key. To roll out a
+change, do both, in this order:
+
+1. Purge the CDN edge first:
+   ```bash
+   curl "https://purge.jsdelivr.net/gh/zekurio/PastelFin@main/theme/pastelfin-minified.css"
+   ```
+2. Then bump the query string in your custom CSS box so every client refetches:
+   ```css
+   @import url('https://cdn.jsdelivr.net/gh/zekurio/PastelFin@main/theme/pastelfin-minified.css?v=2');
+   ```
+
+Bumping before purging just refetches the same stale bytes under a new URL.
 
 ## 👀 Previews
 
 <details>
     <summary><strong>Movie Page Preview</strong></summary>
 
-![Movie Page Preview 2](./assets/neutralfin-movie2.webp)
+![Movie Page Preview 2](./assets/pastelfin-movie2.webp)
 
 </details>
 
 <details>
     <summary><strong>Home Page Preview</strong></summary>
 
-![Home Page Preview](./assets/neutralfin-home.webp)
+![Home Page Preview](./assets/pastelfin-home.webp)
 
 </details>
 
 <details>
     <summary><strong>Movie List Page Preview</strong></summary>
 
-![Movie List Page Preview](./assets/neutralfin-movies.webp)
+![Movie List Page Preview](./assets/pastelfin-movies.webp)
 
 </details>
 
 ## ⚖️ License and Credits
 
-NeutralFin is a modified version of the [ElegantFin](https://github.com/lscambo13/ElegantFin) theme by [lscambo13](https://github.com/lscambo13), originally licensed under the [GNU General Public License v2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html).
+PastelFin is a modified version of [NeutralFin](https://github.com/KartoffelChipss/NeutralFin) by [KartoffelChipss](https://github.com/KartoffelChipss), which is itself a modified version of the [ElegantFin](https://github.com/lscambo13/ElegantFin) theme by [lscambo13](https://github.com/lscambo13), originally licensed under the [GNU General Public License v2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html).
 
-### Modifications by KartoffelChipss:
+### Modifications in PastelFin:
+
+- Pastel lavender accent on top of the dark base
+- Chrome greys tinted toward the accent hue (app bar, drawer, borders, selectors, page background)
+- Play buttons carry the accent instead of upstream's green
+- Google Sans as the UI font and Google Sans Code for monospace
+
+### Modifications inherited from NeutralFin, by KartoffelChipss:
 
 - Applied a neutral black and grey color scheme
-- Lavender accent on top of the grey base
-- Google Sans as the UI font and Google Sans Code for monospace
 - Fix media bar plugin container position
 - Fix media bar buttons consistency
 - Themed login page card (left blue by upstream)
