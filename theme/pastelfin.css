@@ -628,7 +628,7 @@ select {
 
 .cardOverlayContainer > .cardOverlayFab-primary:hover,
 .listItemImageButton:hover {
-    color: var(--accentForegroundColor);
+    color: var(--accentForegroundColor) !important;
 }
 
 .layout-desktop .cardOverlayButton-br,
