@@ -1,14 +1,13 @@
 /*
- * PastelFin v1.0.0
+ * PastelFin v1.1.0
  * Modified version of NeutralFin by KartoffelChipss,
  * itself a modified version of ElegantFin Theme v26.06.06 by lscambo13
  * License: GNU GPL-2.0
  *
  * Changes in PastelFin:
- * - Pastel lavender accent on top of the dark base
- * - Chrome greys tinted toward the accent hue (app bar, drawer, borders,
- *   selectors, page background)
- * - Play buttons carry the accent instead of upstream's green
+ * - Catppuccin Frappé palette with a blue accent
+ * - Catppuccin colors across the app bar, drawer, borders, selectors,
+ *   page background, controls, and status indicators
  * - Google Sans / Google Sans Code as the type stack
  *
  * Inherited from NeutralFin:
@@ -24,55 +23,73 @@
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap');
 
 :root {
-    --elegantFinFooterText: 'PastelFin 1.0.0 based on ElegantFin 26.06.06';
+    --elegantFinFooterText: 'PastelFin 1.1.0 based on ElegantFin 26.06.06';
 
-    /* Base theme colors.
-       The greys are shifted toward the accent hue rather than being flat
-       neutral, so the lavender reads across the whole chrome instead of only
-       on the handful of interactive elements. Swap these back to flat greys
-       (#131313 / #1e1e1e / rgba(40, 40, 40, x) / rgb(71, 71, 71) /
-       rgb(60, 60, 60)) for the untinted NeutralFin base. */
+    /* Catppuccin Frappé */
+    --rosewater: #f2d5cf;
+    --flamingo: #eebebe;
+    --pink: #f4b8e4;
+    --mauve: #ca9ee6;
+    --red: #e78284;
+    --maroon: #ea999c;
+    --peach: #ef9f76;
+    --yellow: #e5c890;
+    --green: #a6d189;
+    --teal: #81c8be;
+    --sky: #99d1db;
+    --sapphire: #85c1dc;
+    --blue: #8caaee;
+    --lavender: #babbf1;
+    --text: #c6d0f5;
+    --subtext1: #b5bfe2;
+    --subtext0: #a5adce;
+    --overlay2: #949cbb;
+    --overlay1: #838ba7;
+    --overlay0: #737994;
+    --surface2: #626880;
+    --surface1: #51576d;
+    --surface0: #414559;
+    --base: #303446;
+    --mantle: #292c3c;
+    --crust: #232634;
+
+    /* PastelFin semantic colors */
     color-scheme: dark;
-    --darkerGradientPoint: #141219;
-    --darkerGradientPointAlpha: rgba(18, 16, 23, 0.85);
-    --lighterGradientPoint: #201d27;
-    --lighterGradientPointAlpha: rgba(32, 29, 39, 0.85);
-    --gradientPointAlpha: rgba(32, 29, 39, 0.3);
-    /* The app bar and nav drawer, mirroring the tinted topbar in calthing /
-       costthing — always on screen, so this is where the tint does most work */
-    --headerColor: rgba(48, 42, 61, 0.55);
-    --drawerColor: rgba(48, 42, 61, 0.92);
+    --darkerGradientPoint: var(--mantle);
+    --darkerGradientPointAlpha: rgba(41, 44, 60, 0.85);
+    --lighterGradientPoint: var(--base);
+    --lighterGradientPointAlpha: rgba(48, 52, 70, 0.85);
+    --gradientPointAlpha: rgba(48, 52, 70, 0.3);
+    --headerColor: rgba(41, 44, 60, 0.55);
+    --drawerColor: rgba(41, 44, 60, 0.92);
 
-    --borderColor: #4a4356;
-    --darkerBorderColor: #35303e;
-    --lighterBorderColor: rgba(255, 255, 255, 0.2);
+    --borderColor: var(--surface1);
+    --darkerBorderColor: var(--surface0);
+    --lighterBorderColor: rgba(198, 208, 245, 0.2);
 
-    --selectorBackgroundColor: #3b3547;
-    --selectorBackgroundColorAlpha: rgba(59, 53, 71, 0.5);
+    --selectorBackgroundColor: var(--surface0);
+    --selectorBackgroundColorAlpha: rgba(65, 69, 89, 0.5);
 
-    /* Accent — lavender. --accentColor carries text, icons, progress and
-       focus rings; --accentColorStrong fills the surfaces that sit under
-       light text, where the lighter tone would not hold enough contrast. */
-    --accentColor: #b39ddb;
-    --accentColorStrong: #9273c9;
+    /* Blue is the accent for both text and filled controls. Filled controls
+       use the dark Frappé base as their foreground for contrast. */
+    --accentColor: var(--blue);
+    --accentColorStrong: var(--accentColor);
+    --accentForegroundColor: var(--base);
 
-    --activeColorAlpha: rgba(146, 115, 201, 0.9);
+    --activeColorAlpha: color-mix(in srgb, var(--accentColor) 90%, transparent);
     --activeColor: var(--accentColorStrong);
     --osdSeekBarPlayedColor: var(--accentColor);
-    --osdSeekBarBufferedColorAlpha: rgba(128, 128, 128, 0.5);
-    --osdSeekBarThumbColor: white;
-    --tableBodyColor: #211e28;
+    --osdSeekBarBufferedColorAlpha: rgba(148, 156, 187, 0.5);
+    --osdSeekBarThumbColor: var(--text);
+    --tableBodyColor: var(--base);
     --uiAccentColor: var(--accentColor);
-    /* Play buttons — the most visible surface in the whole UI. Upstream ships
-       these green; set both back to rgb(41, 154, 93) / rgb(50, 167, 105) to
-       restore that. */
     --btnMiniPlayColor: var(--accentColorStrong);
     --btnMiniPlayBorderColor: var(--accentColor);
-    --btnPlayBorderColor: color-mix(in srgb, var(--btnMiniPlayColor), rgb(255, 255, 255) 5%);
+    --btnPlayBorderColor: color-mix(in srgb, var(--btnMiniPlayColor), var(--text) 5%);
 
     /* Base component colors */
-    --btnDeleteColor: rgb(169, 29, 29);
-    --btnDeleteBorderColor: rgb(217, 84, 84);
+    --btnDeleteColor: var(--red);
+    --btnDeleteBorderColor: var(--maroon);
     --btnSubmitColor: var(--accentColorStrong);
     --btnSubmitBorderColor: var(--accentColor);
     --checkboxCheckedBgColor: var(--accentColorStrong);
@@ -81,9 +98,9 @@
     --defaultBorder: var(--borderWidth) solid var(--borderColor);
     --defaultLighterBorder: var(--borderWidth) solid var(--lighterBorderColor);
 
-    /* dark theme based text colors */
-    --textColor: rgb(209, 213, 219);
-    --dimTextColor: rgb(156, 163, 175);
+    /* Dark theme text colors */
+    --textColor: var(--text);
+    --dimTextColor: var(--overlay2);
 
     /* textures */
     --backgroundGradient: linear-gradient(
@@ -104,11 +121,11 @@
     );
     --headerColorGradient: linear-gradient(
         180deg,
-        rgba(48, 42, 61, 0.95) 30%,
+        rgba(41, 44, 60, 0.95) 30%,
         55%,
         transparent 90%
     );
-    --headerColorGradientAlt: linear-gradient(180deg, rgba(48, 42, 61, 0.95), 70%, transparent);
+    --headerColorGradientAlt: linear-gradient(180deg, rgba(41, 44, 60, 0.95), 70%, transparent);
     --headerBlurMask: linear-gradient(180deg, white 50%, 85%, transparent);
 
     --cardFooterGradient: linear-gradient(0deg, rgb(0 0 0 / 90%), 40%, transparent);
@@ -118,15 +135,15 @@
     --hoverGradientV: linear-gradient(
         0deg,
         transparent,
-        rgb(255 255 255 / 35%) 45%,
-        rgb(255 255 255 / 35%) 55%,
+        rgb(198 208 245 / 35%) 45%,
+        rgb(198 208 245 / 35%) 55%,
         transparent
     );
     --hoverGradientH: linear-gradient(
         90deg,
         transparent,
-        rgb(255 255 255 / 35%) 45%,
-        rgb(255 255 255 / 35%) 55%,
+        rgb(198 208 245 / 35%) 45%,
+        rgb(198 208 245 / 35%) 55%,
         transparent
     );
 
@@ -254,7 +271,7 @@
     color: inherit !important;
 }
 .favorite-button.favorited {
-    color: red;
+    color: var(--red);
 }
 .age-rating {
     color: inherit !important;
@@ -377,6 +394,7 @@ select {
 }
 
 ::selection {
+    color: var(--accentForegroundColor);
     background: var(--activeColorAlpha);
 }
 
@@ -408,7 +426,7 @@ select {
 .paper-icon-button-light.show-focus:focus,
 .emby-tabs .emby-button.show-focus:focus {
     background-color: var(--highlightOutlineColor) !important;
-    color: #fff !important;
+    color: var(--accentForegroundColor) !important;
 }
 
 .emby-tabs .emby-button.show-focus:focus {
@@ -447,7 +465,8 @@ select {
 .countIndicator,
 .fullSyncIndicator,
 .mediaSourceIndicator {
-    background: rgb(31, 80, 189);
+    color: var(--accentForegroundColor);
+    background: var(--accentColor);
     border: var(--defaultLighterBorder);
 }
 
@@ -504,7 +523,7 @@ select {
 }
 
 .card.squareCard[data-type='TvChannel'] .cardImageContainer.cardContent {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: var(--surface2);
 }
 
 .cardImageContainer > .cardDefaultText {
@@ -552,7 +571,7 @@ select {
 
 .cardOverlayContainer {
     transition: 0.5s;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(198, 208, 245, 0.05);
 }
 
 .cardOverlayContainer:after {
@@ -599,7 +618,7 @@ select {
 .listItemImageButton,
 .layout-mobile .cardOverlayButton-br:not([data-action='menu']) > .cardOverlayButtonIcon {
     background-color: var(--btnMiniPlayColor) !important;
-    color: white;
+    color: var(--accentForegroundColor);
     border: var(--defaultLighterBorder);
     border-color: var(--btnMiniPlayBorderColor);
     font-size: 75%;
@@ -609,7 +628,7 @@ select {
 
 .cardOverlayContainer > .cardOverlayFab-primary:hover,
 .listItemImageButton:hover {
-    color: white;
+    color: var(--accentForegroundColor);
 }
 
 .layout-desktop .cardOverlayButton-br,
@@ -621,7 +640,7 @@ select {
 }
 
 .layout-desktop .cardOverlayButton-br > button {
-    color: white;
+    color: var(--textColor);
     display: var(--extraCardButtonsVisibility);
     text-shadow: var(--shadow);
 }
@@ -649,10 +668,9 @@ select {
 
 .layout-mobile .cardOverlayButton-br[data-action='menu'] > .cardOverlayButtonIcon {
     background-color: transparent !important;
-    color: white;
+    color: var(--textColor);
     border: none;
     text-shadow: 1px 1px 0.1em black;
-    color: white;
 }
 
 .cardOverlayContainer:has(> button:hover) {
@@ -1275,9 +1293,7 @@ select {
 }
 
 .starIcon {
-    background: linear-gradient(to right, #90cea1, #01b4e4);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--yellow);
     margin-left: -0.125em;
     transform: translateY(-0.02em);
 }
@@ -1695,11 +1711,11 @@ html,
 
 .backgroundContainer.withBackdrop {
     opacity: 0.9;
-    background: linear-gradient(0deg, var(--darkerGradientPoint), 45%, rgba(20, 18, 25, 0.25));
+    background: linear-gradient(0deg, var(--darkerGradientPoint), 45%, rgba(41, 44, 60, 0.25));
 }
 
 .layout-tv .backgroundContainer.withBackdrop {
-    background: linear-gradient(0deg, var(--darkerGradientPoint), 45%, rgba(20, 18, 25, 0.95));
+    background: linear-gradient(0deg, var(--darkerGradientPoint), 45%, rgba(41, 44, 60, 0.95));
 }
 
 .layout-mobile .withSectionTabs .backgroundContainer.withBackdrop {
@@ -1962,7 +1978,7 @@ progress + span {
 }
 
 .button-link:active {
-    color: rgb(243, 243, 243) !important;
+    color: var(--textColor) !important;
     text-decoration: none;
 }
 
@@ -1993,11 +2009,11 @@ progress + span {
 
 .button-flat:active {
     color: unset;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(198, 208, 245, 0.2);
 }
 
 .playstatebutton-icon-played {
-    color: rgb(34, 197, 94);
+    color: var(--green);
 }
 
 .videoOsdBottom.videoOsdBottom-maincontrols .btnPause {
@@ -2032,7 +2048,7 @@ progress + span {
 .layout-desktop .itemExternalLinks.focuscontainer-x > a:hover,
 .itemExternalLinks.focuscontainer-x > a:active {
     background-color: var(--activeColor) !important;
-    color: white !important;
+    color: var(--accentForegroundColor) !important;
 }
 
 .layout-desktop .itemExternalLinks.focuscontainer-x > a[href*='themoviedb.org']:hover,
@@ -2268,7 +2284,7 @@ progress + span {
     border-radius: var(--smallerRadius) !important;
     box-shadow: inset 0em 7em 10em 20px rgba(0, 0, 0, 0.8);
     background: transparent;
-    border-color: white;
+    border-color: var(--textColor);
     border-style: solid;
     border-width: var(--borderWidthDouble);
     outline: none;
@@ -2276,7 +2292,7 @@ progress + span {
 
 @supports (display: revert) {
     .emby-checkbox:checked + span + .checkboxOutline {
-        outline: solid var(--borderWidth) white;
+        outline: solid var(--borderWidth) var(--textColor);
     }
 }
 
@@ -2289,7 +2305,7 @@ progress + span {
 
 .itemSelectionPanel .material-icons.check:before {
     font-size: 4em;
-    color: #ffffff;
+    color: var(--textColor);
     padding: 0.25em;
 }
 
@@ -2352,13 +2368,14 @@ progress + span {
 }
 
 .checkboxOutline:not(.multiSelectCheckboxOutline) {
-    border: solid gray var(--borderWidth);
-    background-color: white;
+    border: solid var(--overlay0) var(--borderWidth);
+    background-color: var(--mantle);
     transition: all 0.125s;
 }
 
 .emby-checkbox:checked + span + .checkboxOutline:not(.multiSelectCheckboxOutline) {
     box-shadow: none;
+    color: var(--accentForegroundColor);
     background: var(--checkboxCheckedBgColor);
     border: var(--defaultLighterBorder);
 }
@@ -2375,12 +2392,12 @@ progress + span {
 
 @supports (display: revert) {
     .emby-checkbox:focus:not(:checked) + span + .checkboxOutline {
-        outline: var(--borderWidth) solid gray;
+        outline: var(--borderWidth) solid var(--overlay0);
         outline-offset: calc(-2.5 * var(--borderWidth));
     }
 
     .emby-checkbox:focus + span + .checkboxOutline {
-        border-color: white !important;
+        border-color: var(--textColor) !important;
         outline: var(--borderWidth) solid var(--highlightOutlineColor);
     }
 }
@@ -2401,17 +2418,18 @@ progress + span {
 }
 
 .indicator {
-    border: solid rgb(124 124 124 / 50%) var(--borderWidth);
+    border: solid rgba(148, 156, 187, 0.5) var(--borderWidth);
     border-radius: 100em;
 }
 
 .playedIndicator {
-    background: rgb(34, 197, 94);
+    color: var(--base);
+    background: var(--green);
     border: var(--defaultLighterBorder);
 }
 
 .videoIndicator {
-    background: rgb(41 41 41);
+    background: var(--mantle);
     padding: 0.5em;
     transform: scale(0.85);
     border: var(--defaultLighterBorder);
@@ -2420,15 +2438,18 @@ progress + span {
 
 .videoIndicator:has(.photo_album),
 .videoIndicator:has(.folder) {
-    background: peru;
+    color: var(--base);
+    background: var(--peach);
 }
 
 .videoIndicator:has(.photo) {
-    background: steelblue;
+    color: var(--base);
+    background: var(--sapphire);
 }
 
 .videoIndicator:has(.videocam) {
-    background: indianred;
+    color: var(--base);
+    background: var(--red);
 }
 
 .defaultCardBackground,
@@ -2455,7 +2476,7 @@ div[data-type='PhotoAlbum'] .play_arrow:before {
 #btnDeleteImage,
 .manageRecordingButton,
 .dashboardActionsContainer > .emby-button {
-    color: #fff;
+    color: var(--textColor);
     border-radius: var(--smallRadius);
     background: var(--lighterGradientPoint);
     border: var(--defaultBorder);
@@ -2472,7 +2493,7 @@ div[data-type='PhotoAlbum'] .play_arrow:before {
 }
 
 .fab {
-    color: #fff;
+    color: var(--textColor);
     background: var(--lighterGradientPoint);
     border: var(--defaultBorder);
 }
@@ -2535,18 +2556,18 @@ div[data-type='PhotoAlbum'] .play_arrow:before {
 }
 
 .layout-desktop .detailButton:not(.btnPlay):hover {
-    color: black;
+    color: var(--base);
     background: var(--dimTextColor);
 }
 
 .detailButton:active {
-    color: black;
+    color: var(--base);
     background: var(--textColor);
 }
 
 .btnPlay.detailButton {
     background-color: var(--textColor);
-    color: black;
+    color: var(--base);
     border-radius: 3em;
     border-color: var(--borderColor);
     height: 3em;
@@ -2605,29 +2626,31 @@ div[data-type='PhotoAlbum'] .play_arrow:before {
 
 .localnav > .emby-button {
     background: var(--lighterGradientPoint) !important;
-    color: #fff;
+    color: var(--textColor);
     padding: 0.8em 0.8em;
 }
 
 div[data-role='controlgroup'] a.ui-btn-active {
     background: var(--selectorBackgroundColor) !important;
-    color: #fff !important;
+    color: var(--textColor) !important;
 }
 
 .guide-date-tab-button.emby-tab-button-active,
 .guide-date-tab-button:focus {
-    color: white;
+    color: var(--textColor);
 }
 
 #btnDeleteImage,
 .button-delete,
 .btnRevoke,
 #btnShutdown {
+    color: var(--base);
     background: var(--btnDeleteColor);
     border: solid var(--btnDeleteBorderColor) var(--borderWidth);
 }
 
 .button-submit {
+    color: var(--accentForegroundColor) !important;
     background: var(--btnSubmitColor) !important;
     border: solid var(--btnSubmitBorderColor) var(--borderWidth) !important;
 }
@@ -2671,8 +2694,12 @@ div[data-role='controlgroup'] a.ui-btn-active {
 .listItemIcon.schedule:not(.listItemIcon-transparent),
 .listItemIcon.person:not(.listItemIcon-transparent),
 .listItemIcon.live_tv:not(.listItemIcon-transparent) {
-    background-color: rgb(41, 49, 83) !important;
+    background-color: var(--mantle) !important;
     border: var(--defaultBorder);
+}
+
+.listItemIcon.notifications:not(.listItemIcon-transparent) {
+    color: var(--blue);
 }
 
 .readOnlyContent {
@@ -2727,12 +2754,12 @@ div[data-role='controlgroup'] a.ui-btn-active {
 }
 
 .listItem[data-type='Audio']:has(.playlistIndexIndicatorImage) .listItemBodyText {
-    color: white;
+    color: var(--textColor);
     font-weight: 600;
 }
 
 .listItem[data-type='Audio']:has(.playlistIndexIndicatorImage):not(:hover) {
-    background-color: rgba(255, 255, 255, 0.07);
+    background-color: rgba(198, 208, 245, 0.07);
 }
 
 /* [dir="ltr"] .listItem:not(.actionSheetMenuItem)[data-type="Episode"] .listItemBodyText:not(.secondary) {
@@ -2783,12 +2810,17 @@ div[data-role='controlgroup'] a.ui-btn-active {
 }
 
 .listItem:focus {
+    color: var(--accentForegroundColor);
     background: var(--highlightOutlineColor);
+}
+
+.listItem:focus .listItemBodyText {
+    color: var(--accentForegroundColor) !important;
 }
 
 .listItem:active,
 .navMenuOption:active {
-    background: rgba(255, 255, 255, 0.125);
+    background: rgba(198, 208, 245, 0.125);
 }
 
 .listItem-border {
@@ -2808,12 +2840,13 @@ div[data-role='controlgroup'] a.ui-btn-active {
 }
 
 .Mui-selected {
+    color: var(--accentForegroundColor) !important;
     background-color: var(--activeColor) !important;
 }
 
 .actionsheetDivider {
     height: 2px;
-    background: rgb(255, 255, 255, 0.05);
+    background: rgba(198, 208, 245, 0.05);
 }
 
 .actionsheet-xlargeFont {
@@ -2841,7 +2874,7 @@ div[data-role='controlgroup'] a.ui-btn-active {
 }
 
 .actionSheetMenuItem:has(.listItemIcon.check) .listItemBodyText {
-    color: white;
+    color: var(--accentForegroundColor);
 }
 
 .actionSheetMenuItem:has(.listItemIcon.check) .listItemIcon.check {
@@ -2853,7 +2886,7 @@ div[data-role='controlgroup'] a.ui-btn-active {
 }
 
 .actionSheetMenuItem:has(.listItemIcon.check[style*='hidden']):active {
-    background-color: rgba(255, 255, 255, 0.125);
+    background-color: rgba(198, 208, 245, 0.125);
 }
 
 .navMenuOption {
@@ -2872,6 +2905,7 @@ div[data-role='controlgroup'] a.ui-btn-active {
 }
 
 .navMenuOption-selected {
+    color: var(--accentForegroundColor) !important;
     background-color: var(--activeColor) !important;
 }
 
@@ -2943,19 +2977,19 @@ div[data-role='controlgroup'] a.ui-btn-active {
 }
 
 .selectVideoContainer.trackSelectionFieldContainer > label {
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="%23d1d5db" viewBox="0 0 24 24"><g stroke-width="1.5"><path d="M2 12c0-4.7 0-7 1.5-8.5C4.9 2 7.3 2 12 2s7 0 8.5 1.5C22 4.9 22 7.3 22 12s0 7-1.5 8.5C19.1 22 16.7 22 12 22s-7 0-8.5-1.5C2 19.1 2 16.7 2 12Z"/><path stroke-linecap="round" d="M17 2.5v19M7 2.5v19M2.5 7H7m14.5 0H17M2.5 17H7m14.5 0H17M2 12h20"/></g></svg>');
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="%23c6d0f5" viewBox="0 0 24 24"><g stroke-width="1.5"><path d="M2 12c0-4.7 0-7 1.5-8.5C4.9 2 7.3 2 12 2s7 0 8.5 1.5C22 4.9 22 7.3 22 12s0 7-1.5 8.5C19.1 22 16.7 22 12 22s-7 0-8.5-1.5C2 19.1 2 16.7 2 12Z"/><path stroke-linecap="round" d="M17 2.5v19M7 2.5v19M2.5 7H7m14.5 0H17M2.5 17H7m14.5 0H17M2 12h20"/></g></svg>');
 }
 
 .selectAudioContainer.trackSelectionFieldContainer > label {
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="%23d1d5db" viewBox="0 0 24 24"><g stroke-width="1.5"><path d="M9 19a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM21 17a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM9 19V8M21 17V6"/><path stroke-linecap="round" d="m15.7 3.8-4 1.3c-1.3.4-2 .6-2.3 1.2C9 6.8 9 7.5 9 8.9V12l12-4v-.5c0-2.5 0-3.7-.8-4.3-.9-.6-2-.2-4.5.6Z"/></g></svg>');
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="%23c6d0f5" viewBox="0 0 24 24"><g stroke-width="1.5"><path d="M9 19a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM21 17a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM9 19V8M21 17V6"/><path stroke-linecap="round" d="m15.7 3.8-4 1.3c-1.3.4-2 .6-2.3 1.2C9 6.8 9 7.5 9 8.9V12l12-4v-.5c0-2.5 0-3.7-.8-4.3-.9-.6-2-.2-4.5.6Z"/></g></svg>');
 }
 
 .selectSubtitlesContainer.trackSelectionFieldContainer > label {
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="%23d1d5db" viewBox="0 0 24 24"><g stroke-width="1.5"><path d="M2 12c0-3.8 0-5.7 1.2-6.8C4.3 4 6.2 4 10 4h4c3.8 0 5.7 0 6.8 1.2C22 6.3 22 8.2 22 12s0 5.7-1.2 6.8C19.7 20 17.8 20 14 20h-4c-3.8 0-5.7 0-6.8-1.2C2 17.7 2 15.8 2 12Z"/><path stroke-linecap="round" d="M10 16H6M14 13h4M14 16h-1.5M9.5 13h2M18 16h-1.5M6 13h1"/></g></svg>');
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="%23c6d0f5" viewBox="0 0 24 24"><g stroke-width="1.5"><path d="M2 12c0-3.8 0-5.7 1.2-6.8C4.3 4 6.2 4 10 4h4c3.8 0 5.7 0 6.8 1.2C22 6.3 22 8.2 22 12s0 5.7-1.2 6.8C19.7 20 17.8 20 14 20h-4c-3.8 0-5.7 0-6.8-1.2C2 17.7 2 15.8 2 12Z"/><path stroke-linecap="round" d="M10 16H6M14 13h4M14 16h-1.5M9.5 13h2M18 16h-1.5M6 13h1"/></g></svg>');
 }
 
 .selectSourceContainer.trackSelectionFieldContainer > label {
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="%23d1d5db" d="m15.4 4.05-.5.56.5-.56Zm3.95 3.57-.5.55.5-.55Zm2.3 2.53-.68.3.68-.3ZM3.17 20.83l.53-.53-.53.53Zm17.66 0-.53-.53.53.53Zm-6.83.42h-4v1.5h4v-1.5ZM2.75 14v-4h-1.5v4h1.5Zm18.5-.44V14h1.5v-.44h-1.5Zm-6.36-8.95 3.96 3.56 1-1.11L15.9 3.5l-1 1.11Zm7.86 8.95c0-1.69.02-2.75-.41-3.71l-1.37.6c.26.6.28 1.3.28 3.11h1.5Zm-3.9-5.39c1.35 1.22 1.85 1.7 2.12 2.29l1.37-.61c-.43-.96-1.23-1.66-2.49-2.8l-1 1.12Zm-8.82-5.42c1.58 0 2.18.01 2.71.22l.54-1.4c-.85-.33-1.78-.32-3.25-.32v1.5Zm5.86.75c-1.08-.98-1.76-1.6-2.61-1.93l-.54 1.4c.53.2.98.59 2.15 1.64l1-1.11ZM10 21.25c-1.9 0-3.26 0-4.29-.14-1-.13-1.58-.39-2-.81l-1.07 1.06c.75.75 1.7 1.08 2.87 1.24 1.15.15 2.63.15 4.49.15v-1.5ZM1.25 14c0 1.86 0 3.34.15 4.49a4.71 4.71 0 0 0 1.24 2.87L3.7 20.3c-.42-.43-.67-1-.81-2.01A36 36 0 0 1 2.75 14h-1.5ZM14 22.75c1.86 0 3.34 0 4.49-.15a4.71 4.71 0 0 0 2.87-1.24L20.3 20.3c-.43.42-1 .68-2.01.81-1.03.14-2.38.14-4.29.14v1.5ZM21.25 14c0 1.9 0 3.26-.14 4.29-.13 1-.39 1.58-.81 2l1.06 1.07a4.71 4.71 0 0 0 1.24-2.87c.15-1.15.15-2.63.15-4.49h-1.5Zm-18.5-4c0-1.9 0-3.26.14-4.29.14-1 .39-1.58.81-2L2.64 2.63A4.71 4.71 0 0 0 1.4 5.51c-.15 1.15-.15 2.63-.15 4.49h1.5Zm7.28-8.75c-1.87 0-3.36 0-4.51.15a4.72 4.72 0 0 0-2.88 1.24L3.7 3.7c.42-.42 1-.67 2.02-.81 1.03-.14 2.4-.14 4.31-.14v-1.5Z"/><path stroke="%23d1d5db" stroke-width="1.5" d="M13 2.5V5c0 2.36 0 3.54.73 4.27.73.73 1.91.73 4.27.73h4"/></svg>');
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="%23c6d0f5" d="m15.4 4.05-.5.56.5-.56Zm3.95 3.57-.5.55.5-.55Zm2.3 2.53-.68.3.68-.3ZM3.17 20.83l.53-.53-.53.53Zm17.66 0-.53-.53.53.53Zm-6.83.42h-4v1.5h4v-1.5ZM2.75 14v-4h-1.5v4h1.5Zm18.5-.44V14h1.5v-.44h-1.5Zm-6.36-8.95 3.96 3.56 1-1.11L15.9 3.5l-1 1.11Zm7.86 8.95c0-1.69.02-2.75-.41-3.71l-1.37.6c.26.6.28 1.3.28 3.11h1.5Zm-3.9-5.39c1.35 1.22 1.85 1.7 2.12 2.29l1.37-.61c-.43-.96-1.23-1.66-2.49-2.8l-1 1.12Zm-8.82-5.42c1.58 0 2.18.01 2.71.22l.54-1.4c-.85-.33-1.78-.32-3.25-.32v1.5Zm5.86.75c-1.08-.98-1.76-1.6-2.61-1.93l-.54 1.4c.53.2.98.59 2.15 1.64l1-1.11ZM10 21.25c-1.9 0-3.26 0-4.29-.14-1-.13-1.58-.39-2-.81l-1.07 1.06c.75.75 1.7 1.08 2.87 1.24 1.15.15 2.63.15 4.49.15v-1.5ZM1.25 14c0 1.86 0 3.34.15 4.49a4.71 4.71 0 0 0 1.24 2.87L3.7 20.3c-.42-.43-.67-1-.81-2.01A36 36 0 0 1 2.75 14h-1.5ZM14 22.75c1.86 0 3.34 0 4.49-.15a4.71 4.71 0 0 0 2.87-1.24L20.3 20.3c-.43.42-1 .68-2.01.81-1.03.14-2.38.14-4.29.14v1.5ZM21.25 14c0 1.9 0 3.26-.14 4.29-.13 1-.39 1.58-.81 2l1.06 1.07a4.71 4.71 0 0 0 1.24-2.87c.15-1.15.15-2.63.15-4.49h-1.5Zm-18.5-4c0-1.9 0-3.26.14-4.29.14-1 .39-1.58.81-2L2.64 2.63A4.71 4.71 0 0 0 1.4 5.51c-.15 1.15-.15 2.63-.15 4.49h1.5Zm7.28-8.75c-1.87 0-3.36 0-4.51.15a4.72 4.72 0 0 0-2.88 1.24L3.7 3.7c.42-.42 1-.67 2.02-.81 1.03-.14 2.4-.14 4.31-.14v-1.5Z"/><path stroke="%23c6d0f5" stroke-width="1.5" d="M13 2.5V5c0 2.36 0 3.54.73 4.27.73.73 1.91.73 4.27.73h4"/></svg>');
 }
 
 .detailSectionContent a:not(.overview-expand) {
@@ -3088,11 +3122,11 @@ div[data-role='controlgroup'] a.ui-btn-active {
 .alphaPickerButton {
     font-family: 'Google Sans Code', ui-monospace, monospace;
     margin: 0.15em;
-    color: rgba(255, 255, 255, 0.25);
+    color: var(--overlay0);
 }
 
 .alphaPickerButton-selected {
-    color: rgba(255, 255, 255, 1);
+    color: var(--textColor);
 }
 
 .alphaPicker-vertical {
@@ -3172,7 +3206,7 @@ div[data-role='controlgroup'] a.ui-btn-active {
 }
 
 .metadataSidebarIcon {
-    color: #6c7bab;
+    color: var(--accentColor);
 }
 
 .jstree-default .jstree-wholerow-clicked {
@@ -3193,7 +3227,7 @@ div[data-role='controlgroup'] a.ui-btn-active {
 }
 
 .sectionTitleTextButton:active {
-    color: white !important;
+    color: var(--textColor) !important;
 }
 
 .sectionTitleContainer-cards {
@@ -3227,7 +3261,7 @@ div[data-role='controlgroup'] a.ui-btn-active {
     /* margin-left: 0.5rem !important; */
     height: 1.5rem;
     width: 1.5rem;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='%23D1D5DB' aria-hidden='true'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z'%3E%3C/path%3E%3C/svg%3E")
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='%23C6D0F5' aria-hidden='true'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z'%3E%3C/path%3E%3C/svg%3E")
         no-repeat center center;
     background-size: contain;
     /* Stops miscalculating the size on hover effect */
@@ -3249,6 +3283,7 @@ div[data-role='controlgroup'] a.ui-btn-active {
 }
 
 .upNextContainer .btnStartNow {
+    color: var(--accentForegroundColor);
     background-color: var(--btnSubmitColor);
     border-color: var(--btnSubmitBorderColor);
 }
@@ -3264,7 +3299,7 @@ div[data-role='controlgroup'] a.ui-btn-active {
 }
 
 .upNextContainer .upNextDialog-countdownText {
-    color: white;
+    color: var(--accentColor);
 }
 
 .skip-button-container {
@@ -3276,7 +3311,7 @@ div[data-role='controlgroup'] a.ui-btn-active {
     box-shadow: var(--shadow);
     margin-right: var(--sidePadding);
     border-radius: 3em;
-    color: black;
+    color: var(--base);
 }
 
 /* this allows the skip button get focused correctly on TVs using remote navigation; needs 10.10.7*/
@@ -3286,11 +3321,11 @@ div[data-role='controlgroup'] a.ui-btn-active {
 }
 
 .skip-button:hover {
-    background-color: white;
+    background-color: var(--subtext1);
 }
 
 .skip-button:active {
-    background-color: rgba(245, 245, 245, 0.7);
+    background-color: rgba(198, 208, 245, 0.7);
     box-shadow: none;
 }
 
@@ -3306,19 +3341,19 @@ div[data-role='controlgroup'] a.ui-btn-active {
 }
 
 .emby-tab-button:hover {
-    color: whitesmoke;
+    color: var(--textColor);
 }
 
 @media (hover: hover) and (pointer: fine) {
     .paper-icon-button-light:hover:not(:disabled) {
-        color: #fff;
-        background-color: rgb(255 255 255 / 5%);
+        color: var(--accentColor);
+        background-color: rgba(198, 208, 245, 0.05);
     }
 
     .actionSheetMenuItem.emby-button:has(
             .listItemIcon.material-icons.check[style*='hidden']
         ):hover {
-        background-color: rgba(255, 255, 255, 0.125);
+        background-color: rgba(198, 208, 245, 0.125);
     }
 
     .emby-select-withcolor:hover:not(.emby-select[disabled], :focus),
@@ -3333,31 +3368,31 @@ div[data-role='controlgroup'] a.ui-btn-active {
     }
 
     .button-flat:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-        color: white;
+        background-color: rgba(198, 208, 245, 0.2);
+        color: var(--textColor);
     }
 
     .btnPlay.detailButton:hover {
         background-color: var(--textColor);
-        color: black;
+        color: var(--base);
     }
 
     .alphaPickerButton:hover {
-        color: rgba(255, 255, 255, 1);
+        color: var(--textColor);
     }
 
     .listItem:hover {
-        background: rgba(255, 255, 255, 0.125);
+        background: rgba(198, 208, 245, 0.125);
         backdrop-filter: var(--blurLargest);
     }
 
     .navMenuOption:hover {
-        background: rgba(255, 255, 255, 0.125);
+        background: rgba(198, 208, 245, 0.125);
     }
 
     .searchfields-icon:hover,
     .inputContainer .emby-input-iconbutton:hover {
-        color: rgba(255, 255, 255, 0.8);
+        color: var(--subtext1);
     }
 
     #scenesContent .cardScalable:hover {
@@ -3366,18 +3401,18 @@ div[data-role='controlgroup'] a.ui-btn-active {
 
     .sectionTitleTextButton:hover {
         background: transparent !important;
-        color: white !important;
+        color: var(--textColor) !important;
     }
 
     .button-link:hover {
-        color: rgb(243, 243, 243) !important;
+        color: var(--textColor) !important;
         text-decoration: none;
     }
 }
 
 .paper-icon-button-light:active:not(:disabled) {
-    color: #fff;
-    background-color: rgb(255 255 255 / 5%);
+    color: var(--accentColor);
+    background-color: rgba(198, 208, 245, 0.05);
 }
 
 .emby-textarea {
@@ -3402,7 +3437,7 @@ div[data-role='controlgroup'] a.ui-btn-active {
 .inputLabelFocused,
 .selectLabelFocused,
 .textareaLabelFocused {
-    color: #fff;
+    color: var(--accentColor);
 }
 
 .emby-select-withcolor:focus,
@@ -3427,7 +3462,7 @@ div[data-role='controlgroup'] a.ui-btn-active {
 }
 
 .inputContainer .emby-input-iconbutton {
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--overlay2);
     margin-left: -2.5em;
     background-color: transparent !important;
 }
@@ -3442,12 +3477,12 @@ div[data-role='controlgroup'] a.ui-btn-active {
     margin-left: -1.75em;
     margin-bottom: 0;
     border-radius: var(--largeRadius);
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--overlay2);
 }
 
 .searchfields-icon:active,
 .inputContainer .emby-input-iconbutton:active {
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--subtext1);
 }
 
 .searchFields > .searchFieldsInner {
@@ -3465,7 +3500,7 @@ div[data-role='controlgroup'] a.ui-btn-active {
     font-size: 4em;
     white-space: pre-wrap;
     padding-bottom: 0.5ch;
-    color: white;
+    color: var(--textColor);
 }
 
 .nameContainer > h1.itemName,
@@ -3521,7 +3556,7 @@ div[data-role='controlgroup'] a.ui-btn-active {
 }
 
 .guideProgramName {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(198, 208, 245, 0.05);
     height: calc(100% - 0.7em);
     margin: 0.35em 0 0.35em 0.7em;
     border-radius: var(--smallerRadius);
@@ -3532,7 +3567,7 @@ div[data-role='controlgroup'] a.ui-btn-active {
 }
 
 .programCell-active .guideProgramName {
-    background-color: rgba(255, 255, 255, 0.125);
+    background-color: rgba(198, 208, 245, 0.125);
 }
 
 .guideVerticalScroller {
@@ -3546,7 +3581,7 @@ div[data-role='controlgroup'] a.ui-btn-active {
 }
 
 .guide-channelHeaderCell {
-    background-color: rgba(255, 255, 255, 0.125);
+    background-color: rgba(198, 208, 245, 0.125);
     margin: 0.35em 0.7em 0.7em 0.7em;
     width: auto;
     height: calc(4.42em - 0.7em);
@@ -3648,7 +3683,7 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child {
 .playerStats,
 .iconOsd {
     border-radius: var(--largeRadius);
-    background-color: rgba(69, 69, 69, 0.69);
+    background-color: rgba(41, 44, 60, 0.69);
     backdrop-filter: var(--blurDefault);
 }
 
@@ -3689,7 +3724,7 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child {
 
 #loginPage .padded-left.padded-right.padded-bottom-page {
     width: 28em;
-    background: rgba(32, 29, 39, 0.7);
+    background: rgba(41, 44, 60, 0.7);
     padding: 2em 2em 1em 2em !important;
     border-radius: var(--largerRadius);
     backdrop-filter: var(--blurDefault);
@@ -3726,7 +3761,7 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child {
     font-size: 1.875em;
     font-weight: 700;
     line-height: 1.2;
-    color: white;
+    color: var(--textColor);
     text-align: center;
 }
 
@@ -3955,16 +3990,16 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child {
 }
 
 .MuiTabs-flexContainer > .MuiButtonBase-root.Mui-selected {
-    color: white;
+    color: var(--accentColor);
     background-color: transparent !important;
 }
 
 .MuiToggleButtonGroup-grouped.Mui-selected {
-    color: white;
+    color: var(--accentColor);
 }
 
 .MuiButtonBase-root.MuiIconButton-root:hover {
-    color: white;
+    color: var(--accentColor);
     background-color: transparent;
 }
 
@@ -4089,7 +4124,7 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child {
 
 .sectionTabs .emby-tab-button-active {
     margin: 0.25em 0.5em;
-    color: black;
+    color: var(--base);
     background-color: var(--textColor);
 }
 
@@ -4298,7 +4333,7 @@ for extended styling, use the add-on */
 .detail-button:hover,
 .favorite-button:hover {
     background: var(--dimTextColor);
-    color: black;
+    color: var(--base);
 }
 
 /* basic styling for the Media Bar Plugin - end */

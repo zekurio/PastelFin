@@ -4,9 +4,10 @@
 
 <hr />
 
-A Jellyfin theme: the dark, low-contrast base of
-[NeutralFin](https://github.com/KartoffelChipss/NeutralFin) with a pastel
-lavender accent and Google Sans throughout. NeutralFin itself builds on
+A Jellyfin theme that combines the layout of
+[NeutralFin](https://github.com/KartoffelChipss/NeutralFin) with the
+[Catppuccin Frappé](https://github.com/catppuccin/jellyfin) palette, a blue
+accent, and Google Sans. NeutralFin itself builds on
 [ElegantFin](https://github.com/lscambo13/ElegantFin).
 
 Looks best with backdrops enabled in your Jellyfin settings. The previews also
@@ -27,14 +28,15 @@ Server-wide, for every user: **Settings** → **Administration** → **General**
 
 ### Customization
 
-Override any variable below the `@import`. `--accentColor` carries text, icons,
-progress bars, and focus rings; `--accentColorStrong` fills surfaces that sit
-under light text, so keep it the darker of the two.
+Override any variable below the `@import`. The theme exposes every Frappé
+palette color by name. `--accentColor` controls links, progress bars, focus
+rings, selected controls, and play buttons. Blue is the default.
 
 ```css
 :root {
-    --accentColor: #b39ddb;
-    --accentColorStrong: #9273c9;
+    /* Any Frappé accent works, such as var(--mauve) or var(--green) */
+    --accentColor: var(--blue);
+    --accentForegroundColor: var(--base);
 
     /* Use your instance's splashscreen as the login background */
     --loginPageBgUrl: url('/Branding/Splashscreen?format=webp&foregroundLayer=1&quality=33&width=3840&height=2160&blur=2');
@@ -42,20 +44,11 @@ under light text, so keep it the darker of the two.
 }
 ```
 
-For NeutralFin's fully neutral look, point both accents at a grey
-(`rgb(130, 130, 130)` / `rgb(100, 100, 100)`). To dial the tint back further,
-restore upstream's green play buttons with `--btnMiniPlayColor: rgb(41, 154, 93)`
-and `--btnMiniPlayBorderColor: rgb(50, 167, 105)`, and flatten the chrome with
-`--darkerGradientPoint: #131313`, `--lighterGradientPoint: #1e1e1e`,
-`--headerColor: rgba(40, 40, 40, 0.5)`, `--drawerColor: rgba(40, 40, 40, 0.9)`,
-`--borderColor: rgb(71, 71, 71)`, and
-`--selectorBackgroundColor: rgb(60, 60, 60)`.
-
 ### Updating
 
 jsDelivr caches the file at its edge for 12 hours and browsers hold it for 7
 days. A `?v=` query string does **not** bust the CDN cache, only the browser
-one, so do both — purge first, then bump:
+one. Purge first, then bump:
 
 ```bash
 curl "https://purge.jsdelivr.net/gh/zekurio/PastelFin@main/theme/pastelfin-minified.css"
@@ -99,14 +92,14 @@ Bumping before purging just refetches the same stale bytes under a new URL.
 
 ### Credits
 
-PastelFin adds the lavender accent, tints the chrome greys (app bar, drawer,
-borders, selectors, background) toward that hue, carries the accent onto play
-buttons, and swaps the type stack to Google Sans and Google Sans Code.
+PastelFin applies Catppuccin Frappé colors to NeutralFin's layout, uses blue as
+the default accent, and swaps the type stack to Google Sans and Google Sans
+Code. The palette follows the recolor-only
+[Catppuccin Jellyfin theme](https://github.com/catppuccin/jellyfin).
 
 NeutralFin by [KartoffelChipss](https://github.com/KartoffelChipss) contributed
-the neutral black and grey scheme, the themed login card, media bar fixes, and
-assorted CSS refinements, on top of ElegantFin by
-[lscambo13](https://github.com/lscambo13).
+the base layout, themed login card, media bar fixes, and other CSS refinements
+on top of ElegantFin by [lscambo13](https://github.com/lscambo13).
 
 Not affiliated with or endorsed by the Jellyfin project. Media shown in the
 previews belongs to its respective copyright holders and ships with nothing
