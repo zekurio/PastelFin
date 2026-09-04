@@ -1,5 +1,5 @@
 /*
- * PastelFin v1.1.3
+ * PastelFin v1.1.4
  * Modified version of NeutralFin by KartoffelChipss,
  * itself a modified version of ElegantFin Theme v26.06.06 by lscambo13
  * License: GNU GPL-2.0
@@ -23,7 +23,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap');
 
 :root {
-    --elegantFinFooterText: 'PastelFin 1.1.3 based on ElegantFin 26.06.06';
+    --elegantFinFooterText: 'PastelFin 1.1.4 based on ElegantFin 26.06.06';
 
     /* Catppuccin Frappé */
     --rosewater: #f2d5cf;
@@ -182,6 +182,7 @@
        url("<YOUR-JELLYFIN-SERVER-ADDRESS>/Branding/Splashscreen?format=webp&foregroundLayer=1&quality=33&width=3840&height=2160&blur=2"); */
     --loginPageBgUrl: url('');
     --loginPageText: 'Sign in to continue';
+    --loginPageBrandText: 'Jellyfin';
 
     /* use 2.8em keep the overlay play button at bottom-left corner [default];
        use 50% to place it at the center of a card */
@@ -3755,6 +3756,16 @@ body:has(#loginPage:not(.hide)) header.MuiAppBar-root {
 
 body:has(#loginPage:not(.hide)) header.MuiAppBar-root + [aria-hidden='true'] {
     display: none !important;
+}
+
+body:has(#loginPage:not(.hide)) header.MuiAppBar-root a[href='#/']::after {
+    content: var(--loginPageBrandText);
+    font-family: 'Google Sans', sans-serif;
+    font-size: 1.1em;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+    text-transform: none;
 }
 
 #loginPage {

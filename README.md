@@ -41,6 +41,7 @@ rings, selected controls, and play buttons. Blue is the default.
     /* Use your instance's splashscreen as the login background */
     --loginPageBgUrl: url('/Branding/Splashscreen?format=webp&foregroundLayer=1&quality=33&width=3840&height=2160&blur=2');
     --loginPageText: 'Sign in to continue';
+    --loginPageBrandText: 'My Jellyfin';
 }
 ```
 
