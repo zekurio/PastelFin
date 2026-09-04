@@ -1,5 +1,5 @@
 /*
- * PastelFin v1.1.4
+ * PastelFin v1.1.5
  * Modified version of NeutralFin by KartoffelChipss,
  * itself a modified version of ElegantFin Theme v26.06.06 by lscambo13
  * License: GNU GPL-2.0
@@ -23,7 +23,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap');
 
 :root {
-    --elegantFinFooterText: 'PastelFin 1.1.4 based on ElegantFin 26.06.06';
+    --elegantFinFooterText: 'PastelFin 1.1.5 based on ElegantFin 26.06.06';
 
     /* Catppuccin Frappé */
     --rosewater: #f2d5cf;
@@ -3701,7 +3701,14 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child {
     backdrop-filter: var(--blurDefault);
 }
 
+/* Only the real close button accepts input inside this read-only panel. */
+.playerStats {
+    pointer-events: none;
+    z-index: 10;
+}
+
 .playerStats-closeButton {
+    position: absolute !important;
     top: 0.5em;
     right: 0.5em;
     display: inline-flex;
@@ -3713,9 +3720,15 @@ ul.MuiList-root.MuiMenu-list.MuiList-dense > div:first-child {
     border: var(--defaultLighterBorder);
     box-shadow: var(--shadow);
     z-index: 2;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    touch-action: manipulation;
 }
 
-.playerStats-closeButton * {
+.playerStats-closeButton *,
+.playerStats-closeButton::before,
+.playerStats-closeButton::after,
+.playerStats-closeButton > .material-icons::before {
     pointer-events: none !important;
 }
 
